@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +36,7 @@ namespace Project_OOP
         }
 
 
-        public bool AddCustomer(string firstName, string lastName, string phone, int bookings, int customerAge)
+        public bool AddCustomer(string firstName, string lastName, string phone, int customerAge)
         {
 
             Console.WriteLine("Enter First Name: ");
@@ -64,27 +64,24 @@ namespace Project_OOP
                     int customerID = GenerateCustomerID();
                     if (customerAge >= 60)
                     {
-                        newCustomer = new SeniorCitizen(firstName, lastName, phone, bookings, customerAge);
+                        newCustomer = new SeniorCitizen(firstName, lastName, phone, customerAge);
                     }
                     else if (customerAge >= 18)
                     {
-                        newCustomer = new Adult(firstName, lastName, phone, bookings, customerAge);
+                        newCustomer = new Adult(firstName, lastName, phone, customerAge);
                     }
                     else if (customerAge >= 5)
                     {
-                        newCustomer = new Child(firstName, lastName, phone, bookings, customerAge);
+                        newCustomer = new Child(firstName, lastName, phone, customerAge);
                     }
                     else
                     {
-                        newCustomer = new Infant(firstName, lastName, phone, bookings, customerAge);
+                        newCustomer = new Infant(firstName, lastName, phone, customerAge);
                     }
 
-                    // Add the new customer to the array
-                    customerList[numCustomer] = newCustomer;
-
-                    // Increment the customer count
-                    numCustomer++;
-
+                    
+                    customerList[numCustomer] = newCustomer; // Add the new customer to the array                   
+                    numCustomer++;                           // Increment the customer count
                     Console.WriteLine("Customer was successfully added!");
                     return true; // Customer addition succeeded
                 }
