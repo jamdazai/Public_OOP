@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +12,13 @@ namespace Project_OOP
         public string customerFirstName;
         public string customerLastName;
         public string customerPhone;
-        protected int bookings;
         protected int customerAge;
 
-        public Customers(string customerFirstName, string customerLastName, string customerPhone, int bookings, int cAge)
+        public Customers(string customerFirstName, string customerLastName, string customerPhone, int cAge)
         {
             this.customerFirstName = customerFirstName;
             this.customerLastName = customerLastName;
             this.customerPhone = customerPhone;
-            this.bookings = bookings;
             this.customerAge = cAge;
         }
 
@@ -30,7 +28,7 @@ namespace Project_OOP
             string s = "\nCustomer's ID: " + customerID;
             s = s + "\nCustomer's Full name: " + customerFirstName + " " + customerLastName;
             s = s + "\nPhone #: " + customerPhone;
-            s = s + "\nBookings: " + bookings;
+            //s = s + "\nBookings: " + bookings;
             return s;
         }
     }
