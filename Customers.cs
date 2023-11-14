@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +8,15 @@ namespace Project_OOP
 {
     internal class Customers
     {
-        private string customerID;
+        private int customerID;
         public string customerFirstName;
         public string customerLastName;
         public string customerPhone;
         protected int customerAge;
 
-        public Customers(string customerFirstName, string customerLastName, string customerPhone, int cAge)
+        public Customers(int customerID,string customerFirstName, string customerLastName, string customerPhone, int cAge)
         {
+            this.customerID = customerID;
             this.customerFirstName = customerFirstName;
             this.customerLastName = customerLastName;
             this.customerPhone = customerPhone;
@@ -25,7 +26,8 @@ namespace Project_OOP
 
         public override string ToString()
         {
-            string s = "\nCustomer's ID: " + customerID;
+            string formattedID = customerID.ToString("D4");
+            string s = "\nCustomer's ID: " + formattedID;
             s = s + "\nCustomer's Full name: " + customerFirstName + " " + customerLastName;
             s = s + "\nPhone #: " + customerPhone;
             //s = s + "\nBookings: " + bookings;

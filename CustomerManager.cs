@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +25,8 @@ namespace Project_OOP
             // Making sure if we already have existing firstname, lastname and phone for our customers.
             foreach (var customer in customerList)
             {
-                if (customer.customerFirstName == firstName &&
+                if (customer != null &&
+                    customer.customerFirstName == firstName &&
                     customer.customerLastName == lastName && 
                     customer.customerPhone == phone)
                 {
@@ -38,71 +39,55 @@ namespace Project_OOP
 
         public bool AddCustomer(string firstName, string lastName, string phone, int customerAge)
         {
-
-            Console.WriteLine("Enter First Name: ");
-            firstName = Console.ReadLine();
-
-            Console.WriteLine("\nEnter Last Name: ");
-            lastName = Console.ReadLine();
-
-            Console.WriteLine("\nEnter Phone Number: ");
-            phone = Console.ReadLine();
-
             // Check if customer already exists with the same first name, last name, and phone
             if (CustomerExists(firstName, lastName, phone))
             {
                 Console.WriteLine("Customer already exists. Cannot duplicate records!");
                 return false; // Customer addition failed
             }
+
+            // Check if the customer list is already full.
+            if (numCustomer >= maxCustomer)
+            {
+                Console.WriteLine("Customer list is full! Cannot add more customers.");
+                return false;
+            }
+
+
+            Customers newCustomer;
+            int customerID = GenerateCustomerID();
+            if (customerAge >= 60)
+            {
+                newCustomer = new SeniorCitizen(customerID, firstName, lastName, phone, customerAge);
+            }
+            else if (customerAge >= 18)
+            {
+                newCustomer = new Adult(customerID, firstName, lastName, phone, customerAge);
+            }
+            else if (customerAge >= 5)
+            {
+                newCustomer = new Child(customerID, firstName, lastName, phone, customerAge);
+            }
             else
             {
-                // Check if the array is not full before adding a new customer
-                if (numCustomer < maxCustomer)
-                {
-                    // Choose the appropriate customer type based on age
-                    Customers newCustomer;
-                    int customerID = GenerateCustomerID();
-                    if (customerAge >= 60)
-                    {
-                        newCustomer = new SeniorCitizen(firstName, lastName, phone, customerAge);
-                    }
-                    else if (customerAge >= 18)
-                    {
-                        newCustomer = new Adult(firstName, lastName, phone, customerAge);
-                    }
-                    else if (customerAge >= 5)
-                    {
-                        newCustomer = new Child(firstName, lastName, phone, customerAge);
-                    }
-                    else
-                    {
-                        newCustomer = new Infant(firstName, lastName, phone, customerAge);
-                    }
-
-                    
-                    customerList[numCustomer] = newCustomer; // Add the new customer to the array                   
-                    numCustomer++;                           // Increment the customer count
-                    Console.WriteLine("Customer was successfully added!");
-                    return true; // Customer addition succeeded
-                }
-                else
-                {
-                    // Inform the user that the list is full.
-                    Console.WriteLine("Customer list is full. Cannot add more customers.");
-                    return false; // Customer addition failed
-                }
+                newCustomer = new Infant(customerID, firstName, lastName, phone, customerAge);
             }
+            customerList[numCustomer] = newCustomer; // Add the new customer to the array                   
+            numCustomer++;                           // Increment the customer count
+            Console.WriteLine("Customer was successfully added!");
+            return true; // Customer addition succeeded
+
         }
 
 
-        private int GenerateCustomerID()
+        public int GenerateCustomerID()
         {
-            return numCustomer + 1 ;
+            return 1000 + numCustomer + 1;
         }
 
         public string ViewCustomers()
         {
-            string s = "\n* LIST OF ALL CUSTOMERS *";
+            string s = " === * LIST OF ALL CUSTOMERS * === ";
             for(int i = 0; i < numCustomer; i++)
             {
                 s = s +"\n" + customerList[i].ToString();

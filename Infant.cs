@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +10,8 @@ namespace Project_OOP
     {
         protected int infantAge;
 
-        public Infant(string firstName, string lastName, string phone, int iAge)
-            : base(firstName, lastName, phone, iAge)
+        public Infant(int customerID, string firstName, string lastName, string phone, int iAge)
+            : base(customerID, firstName, lastName, phone, iAge)
         {
             this.infantAge = iAge;
         }

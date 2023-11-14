@@ -1,3 +1,5 @@
+﻿using System.Numerics;
+
 namespace Project_OOP
 {
     internal class Program
@@ -12,17 +14,35 @@ namespace Project_OOP
                     Console.WriteLine("1. Add Customer");
                     Console.WriteLine("2. View Customers");
                     Console.WriteLine("3. Delete Customer");
-                    Console.WriteLine("4. Back to Main Menu");
+                    Console.WriteLine("4. Back to Main Menu\n");
 
+                    Console.WriteLine("Kindly, enter your choice: ");
                     int choice = Convert.ToInt32(Console.ReadLine());
+                    string firstName, lastName, phone;
+                    int customerAge;
 
                     switch (choice)
                     {
                         case 1:
-                            customersManager.AddCustomer();
-                            break;
+                        Console.Clear();
+                        Console.WriteLine("Enter First Name: ");
+                        firstName = Console.ReadLine();
+
+                        Console.WriteLine("\nEnter Last Name: ");
+                        lastName = Console.ReadLine();
+
+                        Console.WriteLine("\nEnter Phone Number: ");
+                        phone = Console.ReadLine();
+
+                        Console.WriteLine("\nEnter age: ");
+                        customerAge = Convert.ToInt32(Console.ReadLine());
+
+                        customersManager.AddCustomer(firstName, lastName, phone, customerAge);
+                        Console.Clear();
+                        break;
                         case 2:
-                            customersManager.ViewCustomers();
+                            Console.Clear();
+                            Console.WriteLine(customersManager.ViewCustomers());
                             break;
                         case 3:
                             // Implement delete customer logic
