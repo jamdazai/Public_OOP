@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Project_OOP
 {
-    internal class Customers
+    internal abstract class Customers
     {
-        private int customerID;
+        public int customerID;
         public string customerFirstName;
         public string customerLastName;
         public string customerPhone;
-        protected int customerAge;
+        public int customerAge;
 
         public Customers(int customerID,string customerFirstName, string customerLastName, string customerPhone, int cAge)
         {
@@ -22,6 +22,7 @@ namespace Project_OOP
             this.customerPhone = customerPhone;
             this.customerAge = cAge;
         }
+
 
 
         public override string ToString()
