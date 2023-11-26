@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_OOP
+namespace Project_practice_1
 {
     internal class SeniorCitizen : Customers
     {
         protected int seniorCitizenAge;
 
         public SeniorCitizen(int customerID, string firstName, string lastName, string phone, int scAge)
-            :base(customerID,firstName, lastName, phone, scAge)
+            : base(customerID, firstName, lastName, phone, scAge)
         {
             this.seniorCitizenAge = scAge;
         }

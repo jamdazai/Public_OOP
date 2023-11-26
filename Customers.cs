@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_OOP
+namespace Project_practice_1
 {
     internal abstract class Customers
     {
@@ -14,7 +14,7 @@ namespace Project_OOP
         public string customerPhone;
         public int customerAge;
 
-        public Customers(int customerID,string customerFirstName, string customerLastName, string customerPhone, int cAge)
+        public Customers(int customerID, string customerFirstName, string customerLastName, string customerPhone, int cAge)
         {
             this.customerID = customerID;
             this.customerFirstName = customerFirstName;

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_OOP
+namespace Project_practice_1
 {
     internal class CustomerManager
     {
@@ -32,7 +31,8 @@ namespace Project_OOP
                 {
                     return true;  // Customer exists.
                 }
-            }       return false; // Customer does not exist.
+            }
+            return false; // Customer does not exist.
         }
 
 
@@ -173,11 +173,12 @@ namespace Project_OOP
         public string ViewCustomers()
         {
             string s = " === * LIST OF ALL CUSTOMERS * === ";
-            for(int i = 0; i < numCustomer; i++)
+            for (int i = 0; i < numCustomer; i++)
             {
-                s = s +"\n" + customerList[i].ToString();
+                s = s + "\n" + customerList[i].ToString();
                 s = s + "\n";
-            }return s;
+            }
+            return s;
         }
     }
 }

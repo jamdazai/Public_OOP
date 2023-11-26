@@ -1,12 +1,11 @@
-﻿using System.Numerics;
-
-namespace Project_OOP
+﻿namespace Project_practice_1
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-                CustomerManager customersManager = new CustomerManager(200);
+            CustomerManager customersManager = new CustomerManager(200);
+            FlightManager flightManager = new FlightManager(15);
 
             while (true)
             {
@@ -24,16 +23,18 @@ namespace Project_OOP
                 switch (mainChoice)
                 {
                     case 1:
+                        // Implement Customers menu logic.
                         RunCustomerMenu(customersManager);
                         break;
                     case 2:
-                        // Implement Flights menu logic
+                        // Implement Flights menu logic.
+                        RunFlightMenu(flightManager);
                         break;
                     case 3:
-                        // Implement Bookings menu logic
+                        // Implement Bookings menu logic.
                         break;
                     case 4:
-                        // Exit the program
+                        // Exit the program.
                         Environment.Exit(0);
                         break;
                     default:
@@ -135,6 +136,119 @@ namespace Project_OOP
                 }
             }
 
+        }
+
+        static void RunFlightMenu(FlightManager flightManager)
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("* == XYZ Airlines Limited == *\n");
+                Console.WriteLine("FLIGHT MENU");
+                Console.WriteLine("Please select a choice from the menu below:");
+                Console.WriteLine("1. Add Flight");
+                Console.WriteLine("2. View Flights");
+                Console.WriteLine("3. View Particular Flight");
+                Console.WriteLine("4. Delete Flight");
+                Console.WriteLine("5. Back to Main Menu\n");
+
+                Console.WriteLine("Enter your choice: ");
+                int choice = Convert.ToInt32(Console.ReadLine());
+                string origin, destination;
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Enter Origin: ");
+                        origin = Console.ReadLine();
+
+                        Console.WriteLine("\nEnter Destination: ");
+                        destination = Console.ReadLine();
+
+                        flightManager.AddFlight(origin, destination);
+                        Console.WriteLine("\nPress any key to continue.");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine(flightManager.ViewFlights());
+                        Console.WriteLine("\nPress any key to continue.");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("Enter Flight ID: ");
+                        int flightID = Convert.ToInt32(Console.ReadLine());
+
+                        Console.WriteLine(flightManager.ViewParticularFlight(flightID));
+                        Console.WriteLine("\nPress any key to continue.");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 4:
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(flightManager.ViewFlights());      // Let the user see the lists of the flights while deciding what to delete.
+                            Console.WriteLine("\n\n****************");
+                            Console.WriteLine("Enter Flight ID to delete: ");    // User must provide the Flight ID of the one they wants to delete.
+                            int flightIDToDelete;
+
+                                if (!int.TryParse(Console.ReadLine(), out flightIDToDelete))
+                                {
+                                    Console.WriteLine("Invalid input. Please enter a valid Flight ID.");
+                                    Console.WriteLine("Press any key to continue.");
+                                    Console.ReadKey();
+                                    continue; // Restart the loop if the input is invalid
+                                }
+
+                                if (flightManager.DeleteFlight(flightIDToDelete))
+                                {
+                                    Console.WriteLine("Flight successfully deleted!");
+                                    break;    // Exit the loop if the flight is successfully deleted
+                                }
+
+                                else
+                                {
+                                    Console.WriteLine("Do you wish to continue? (Y/N)");
+                                    ConsoleKeyInfo key = Console.ReadKey();
+                                    Console.WriteLine();
+
+                                    switch (key.KeyChar)
+                                    {
+                                        case 'Y':
+                                        case 'y':
+                                            // Continue the loop to get the proper flightID.
+                                            break;
+                                        case 'N':
+                                        case 'n':
+                                            // User chose not to continue.
+                                            // Return to the Main Menu.
+                                            Console.Clear();
+                                            return;
+                                        default:
+                                            Console.WriteLine("Invalid input. Please enter Y/y or N/n.");
+                                            Console.WriteLine("Press any key to continue.");
+                                            Console.ReadKey();
+                                            break;
+                                    }
+                                }
+                        }
+                        Console.WriteLine("\nPress any key to continue.");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 5:
+                        Console.Clear();
+                        return; // Exit the flight menu and return to the main menu
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
         }
     }
 }
