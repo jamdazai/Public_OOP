@@ -102,30 +102,58 @@ namespace Project_practice_1
                 return false;                                                              // return the logic as false.
             }
 
-            if (FlightHasBookings(flightID))
-            {
-                Console.WriteLine("Cannot delete the flight. There are customers booked on this flight.");
+            if (FlightHasBookings(flightID))                                                                 // If flight has bookings,
+            {                                                                                                // we cannot delete it.
+                Console.WriteLine("Cannot delete the flight. There are customers booked on this flight.");   // Inform the user about it.
                 return false;
             }
+
+            if (flightList[flightIndex].PassengerCount >= 1)                                                 // If there is a passenger in the specific flight
+            {                                                                                                // we cannot delete it too.
+                Console.WriteLine("Cannot delete the flight. There's a customer who booked this flight.");   // Inform the user that we cannot delete it.
+                return false;
+            }
+
+            for (int i = 0; i < numBookings; i++)
+            {
+                if (bookingList[i] != null && bookingList[i].BookedFlight != null &&
+                    bookingList[i].BookedFlight.flightID == flightID)
+                {
+                    bookingList[i].BookedFlight.RemoveBooking(bookingList[i]);
+                    bookingList[i].BookedCustomer.RemoveBooking(bookingList[i]);
+                                                                                           // Remove the booking by shifting the remaining elements.
+                    for (int j = i; j < numBookings - 1; j++)
+                    {
+                        bookingList[j] = bookingList[j + 1];
+                    }
+                    numBookings--;                                                         // Decrease the number of bookings.
+                    i--;                                                                   // Adjust the index since we shifted the elements.
+                }
+            }
+
+            for (int i = flightIndex; i < numFlights - 1; i++)
+            {
+                flightList[i] = flightList[i + 1];
+            }
+
                                                                                            // If the flight is found; 
             numFlights--;                                                                  // Decrement the number of flights we have.
             Console.WriteLine("Flight successfully deleted!");                             // Inform the user that the flight was successfully deleted.
             return true;
         }
 
-        private bool FlightHasBookings(int flightID)
+        private bool FlightHasBookings(int flightID)                    // Method to see if Flight has bookings.
         {
-            // Iterate through bookings to check if the flight has any
-            for (int i = 0; i < numBookings; i++)
+            for (int i = 0; i < numBookings; i++)                       // Iterate through bookings to check if the flight has any.
             {
                 if (bookingList[i] != null &&
                     bookingList[i].BookedFlight != null && 
                     bookingList[i].BookedFlight.flightID == flightID)
                 {
-                    return true; // Flight has bookings
+                    return true;                                        // Flight has bookings.
                 }
             }
-            return false; // Flight has no bookings
+            return false;                                               // Flight has no bookings.
         }
 
         public Flight GetFlightById(int flightId)           // Method to get a flight using the Flight ID.

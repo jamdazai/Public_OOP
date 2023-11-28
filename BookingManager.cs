@@ -95,7 +95,7 @@ namespace Project_practice_1
 
                 if (flight == null || customer == null)                                     // If the flight and customer doesn't corresponds
                 {                                                                           // to what the user entered,
-                    Console.WriteLine("Booking failed. Invalid Flight ID or Customer ID."); // we're goint to tell the user that the inputs are invalid.
+                    Console.WriteLine("Booking failed. Invalid Flight ID or Customer ID."); // we're going to tell the user that the inputs are invalid.
                     return false;
                 }
 
@@ -111,6 +111,8 @@ namespace Project_practice_1
                     flight.PassengerCount++;                                                    // We also adding up the number of passengers in that specific flight.
                     bookingList[numBookings] = new Booking(newBookingNumber, flight, customer); // We also add the bookings to the list of our bookings.
                     numBookings++;                                                              // We are adding up the number of bookings.
+                    flight.AddBooking(bookingList[numBookings - 1]);
+                    customer.AddBooking(bookingList[numBookings - 1]);
                     Console.WriteLine("Booking successfully made.");                            // Inform the user that the booking is successful.
                     return true;
                 }

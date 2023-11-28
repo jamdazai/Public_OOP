@@ -12,6 +12,7 @@ namespace Project_practice_1
         public int BookingNumber { get; }
         public Flight BookedFlight { get; }
         public Customers BookedCustomer { get; }
+        public DateTime Date { get; private set; }
 
         public Booking(int bookingNumber, Flight bookedFlight, Customers bookedCustomer)
         {
@@ -19,14 +20,15 @@ namespace Project_practice_1
             BookingNumber = bookingNumber;
             BookedFlight = bookedFlight;
             BookedCustomer = bookedCustomer;
+            Date = DateTime.Now;
         }
 
         public override string ToString()                       // Method to make a booking details into a string
         {
-            string s = $"\nBooking Number: {BookingNumber}";
-            s += $"\nBooking Date: {BookingDate}\n\n";
-            s += $"FLIGHT DETAILS: {BookedFlight}\n\n";
-            s += $"CUSTOMER DETAILS: {BookedCustomer}\n";
+            string s = $"\nBooking Number: {BookingNumber}";    // Show the Booking Number
+            s += $"\nBooking Date: {BookingDate}\n\n";          // Show the Booking Date
+            s += $"FLIGHT DETAILS: {BookedFlight}\n\n";         // Show the Flight Details.
+            s += $"CUSTOMER DETAILS: {BookedCustomer}\n";       // Show the Customer Details.
             s += "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*";
             return s;
         }
