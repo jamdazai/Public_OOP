@@ -1,4 +1,8 @@
-﻿namespace Project_practice_1
+﻿// James Furaque  - 101382608
+// Tenzin Thinley - 101454475
+// Carl Trinidad  - 101425883
+// Kate Labis     - 101413112
+namespace Project_practice_1
 {
     internal class AirlineCoordinator
     {
@@ -19,10 +23,10 @@
             {
                 Console.WriteLine("* == XYZ Airlines Limited == *\n\n");
                 Console.WriteLine("~ MAIN MENU ~\n");
-                Console.WriteLine("1. Customer");                                 // Allows the user to use Customer's Menu.
+                Console.WriteLine("1. Customer");                                  // Allows the user to use Customer's Menu.
                 Console.WriteLine("2. Flights");                                   // Allows the user to use Flight's Menu.
-                Console.WriteLine("3. Booking");                                  // Allows the user to use Booking Menu.
-                Console.WriteLine("4. Exit\n\n");                                    // Allows the user to exit the program.
+                Console.WriteLine("3. Booking");                                   // Allows the user to use Booking Menu.
+                Console.WriteLine("4. Exit\n\n");                                  // Allows the user to exit the program.
 
                 Console.WriteLine("Enter your choice: ");
                 if (int.TryParse(Console.ReadLine(), out int mainChoice))
@@ -70,7 +74,7 @@
                 Console.WriteLine("1. Add Customer");                                   // Allows the user to add customer.
                 Console.WriteLine("2. View Customers");                                 // Allows the user to view the list of customers.
                 Console.WriteLine("3. Delete Customer");                                // Allows the user to delete a customer.
-                Console.WriteLine("4. Back to Main Menu\n\n");                            // Allows the user to go back to Main Menu.
+                Console.WriteLine("4. Back to Main Menu\n\n");                          // Allows the user to go back to Main Menu.
 
                 Console.WriteLine("Enter your choice: ");                               // Ask the user for their choice.
                 int choice;
@@ -149,7 +153,7 @@
                         Console.Clear();
                         return;                                                              // Exit the customer menu and return to the main menu
                     default:
-                        Console.WriteLine("\nInvalid choice. Please try again.");              // Inform the user that they're entering wrong choice.
+                        Console.WriteLine("\nInvalid choice. Please try again.");            // Inform the user that they're entering wrong choice.
                         break;
                 }
                 Console.WriteLine("Press any key to continue.....");
@@ -168,7 +172,7 @@
                 Console.WriteLine("2. View Flights");                                  // Allows the user to view all the flights.
                 Console.WriteLine("3. View Particular Flight");                        // Allows the user to view a particular flight.
                 Console.WriteLine("4. Delete Flight");                                 // Allows the user to delete a flight.
-                Console.WriteLine("5. Back to Main Menu\n\n");                           // Allows the user to go back to the MAIN MENU.
+                Console.WriteLine("5. Back to Main Menu\n\n");                         // Allows the user to go back to the MAIN MENU.
 
                 Console.WriteLine("Enter your choice: ");
                 if (int.TryParse(Console.ReadLine(), out int choice))
