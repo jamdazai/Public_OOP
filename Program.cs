@@ -2,7 +2,10 @@
 // Tenzin Thinley - 101454475
 // Carl Trinidad  - 101425883
 // Kate Labis     - 101413112
-namespace Project_practice_1
+using Project_OOP;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Project_OOP
 {
     internal class AirlineCoordinator
     {
@@ -21,7 +24,7 @@ namespace Project_practice_1
         {
             while (true)
             {
-                Console.WriteLine("* == XYZ Airlines Limited == *\n\n");
+                Console.WriteLine("* == FLIGH HIGH AIRLINES == *\n\n");
                 Console.WriteLine("~ MAIN MENU ~\n");
                 Console.WriteLine("1. Customer");                                  // Allows the user to use Customer's Menu.
                 Console.WriteLine("2. Flights");                                   // Allows the user to use Flight's Menu.
@@ -43,6 +46,8 @@ namespace Project_practice_1
                             RunBookingMenu();        // Run the Booking Menu
                             break;
                         case 4:
+                            Console.Clear();
+                            Console.WriteLine("Thank you for using Fly High Airline's System!\n\n3");
                             Environment.Exit(0);     // Exit the program.
                             break;
                         default:
@@ -69,7 +74,7 @@ namespace Project_practice_1
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("* == XYZ Airlines Limited == *\n\n");
+                Console.WriteLine("* == FLIGH HIGH AIRLINES == *\n\n");
                 Console.WriteLine("~ CUSTOMER'S MENU ~\n");
                 Console.WriteLine("1. Add Customer");                                   // Allows the user to add customer.
                 Console.WriteLine("2. View Customers");                                 // Allows the user to view the list of customers.
@@ -86,7 +91,7 @@ namespace Project_practice_1
                 }
                 string firstName, lastName, phone;
                 int customerAge;
-           
+
                 switch (choice)
                 {
                     case 1:                                                 // Start of Add Customer logic.
@@ -101,14 +106,14 @@ namespace Project_practice_1
                         phone = Console.ReadLine();                         // Pass the input to phone.
 
                         Console.WriteLine("\nEnter age: ");                 // Ask the user fo age.
-                            if (!int.TryParse(Console.ReadLine(), out customerAge))               // Pass the input to customer age and convert it to int.
-                            {
-                                Console.WriteLine("Invalid input. Please enter a valid number."); // Remind the user to put a valid number.
-                                Console.WriteLine("Press any key to continue.");
-                                Console.ReadKey();
-                                Console.Clear();
-                                continue;                                                         // Go back to Customer Menu
-                            }
+                        if (!int.TryParse(Console.ReadLine(), out customerAge))               // Pass the input to customer age and convert it to int.
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid number."); // Remind the user to put a valid number.
+                            Console.WriteLine("Press any key to continue.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            continue;                                                         // Go back to Customer Menu
+                        }
 
                         if (customersManager.AddCustomer(firstName, lastName, phone, customerAge))     // If everything is good.
                         {                                                                              // inform the user that
@@ -123,6 +128,14 @@ namespace Project_practice_1
                         Console.Clear();
                         break;                                               // End of Add Customer Logic
                     case 2:                                                  // Start of View Customers.
+                        if (customersManager.numCustomer == 0)               // Check if we have lists of customers.
+                        {
+                            Console.WriteLine("\n\nCustomer list is empty.");// If we don't have any, inform the user.
+                            Console.WriteLine("Press any key to continue."); // Allow them to exit.
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        }
                         Console.Clear();
                         Console.WriteLine(customersManager.ViewCustomers()); // Call the method ViewCustomers
                         Console.WriteLine("\nPress any key to continue.");   // to give a list of all the customers.
@@ -130,6 +143,14 @@ namespace Project_practice_1
                         Console.Clear();
                         break;                                               // End of View Customers.   
                     case 3:                                                        // Start of Delete a customer.
+                        if (customersManager.numCustomer == 0)                     // Check if we have existing customers.
+                        {
+                            Console.WriteLine("\n\nCustomer list is empty.");      // If don't have existing customers, inform the user.
+                            Console.WriteLine("Press any key to continue.");       // Allow the user to exit.
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        }
                         Console.Clear();
                         Console.WriteLine("Enter First Name: ");                   // Ask the user to enter first name
                         string firstNameToDelete = Console.ReadLine();             // of the customer that they want to delete.
@@ -163,9 +184,7 @@ namespace Project_practice_1
                         Console.WriteLine("\nInvalid choice. Please try again.");            // Inform the user that they're entering wrong choice.
                         break;
                 }
-                Console.WriteLine("Press any key to continue.....");
-                Console.ReadKey();
-            }       
+            }
         }                                                                                   // END OF CUSTOMER MENU
 
         private void RunFlightMenu()                                                    // FLIGHTS MENU
@@ -173,7 +192,7 @@ namespace Project_practice_1
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("* == XYZ Airlines Limited == *\n\n");
+                Console.WriteLine("* == FLIGH HIGH AIRLINES == *\n\n");
                 Console.WriteLine("~ FLIGHTS MENU ~\n");
                 Console.WriteLine("1. Add Flight");                                    // Allows the user to add flight.
                 Console.WriteLine("2. View Flights");                                  // Allows the user to view all the flights.
@@ -208,27 +227,42 @@ namespace Project_practice_1
                                 }
 
                             flightManager.AddFlight(origin, destination, maxSeats);     // Add the flight to using our method AddFlight.
-                            Console.WriteLine("\nPress any key to continue.");
-                            Console.ReadKey();
+                            break;                                                      // End of the Add Flight logic.           
+                        case 2:                                                   // Start of logic to View Flights
+                            if (flightManager.numFlights == 0)                    // Check if we have existing flights.
+                            {
+                                Console.WriteLine("\n\nFlight list is empty.");   // If we don't have existing flights, inform the user.
+                                Console.WriteLine("Press any key to continue.");  // No available flights, exit.
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;
+                            }
                             Console.Clear();
-                            break;                                       // End of the Add Flight logic.           
-                        case 2:                                                 // Start of logic to View Flights
-                            Console.Clear();
-                            Console.WriteLine(flightManager.ViewFlights());     // Call our method ViewFlights to list all the flights we have.
-                            Console.WriteLine("\nPress any key to continue.");  // Allows the user to continue to the Flight Menu.
-                            Console.ReadKey();
-                            Console.Clear();
+                            Console.WriteLine(flightManager.ViewFlights());     // Call our method ViewFlights to list all the flights we have.                           
                             break;                                              // End of the View Flights logic.
-                        case 3:                                                                   // Start of logic to View a Particular FLight
+                        case 3:                                                        // Start of logic to View a Particular FLight
+                            if (flightManager.numFlights == 0)                         // Check if we have existing flights.
+                            {                                                          // If we don't have flights inform the user.
+                                Console.WriteLine("\n\nFlight list is empty.");        // Direct the user to exit.
+                                Console.WriteLine("Press any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;
+                            }
                             Console.Clear();
                             Console.WriteLine("Enter Flight ID: ");                               // Ask the user for the FlightID
                             int flightID = Convert.ToInt32(Console.ReadLine());                   // Using the FlightID,
                             Console.WriteLine(flightManager.ViewParticularFlight(flightID));      // We're going to let the user to see the flight.
-                            Console.WriteLine("\nPress any key to continue.");                    // Allow the user to continue by pressing any key.
-                            Console.ReadKey();
-                            Console.Clear();
                             break;                                                                // End of logic to View a Particular Flight
                         case 4:                                                                             // Start of logic to delete a flight.
+                            if (flightManager.numFlights == 0)                       // Check if we have exiting flights.
+                            {                                                        // If we don't have existing flights,
+                                Console.WriteLine("\n\nFlight list is empty.");      // Inform the user.
+                                Console.WriteLine("Press any key to continue.");     // Direct them to exit.
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;
+                            }
                             while (true)
                             {
                                 Console.Clear();
@@ -273,9 +307,6 @@ namespace Project_practice_1
                                     }
                                 }
                             }
-                            Console.WriteLine("\nPress any key to continue.");
-                            Console.ReadKey();
-                            Console.Clear();
                             break;
                         case 5:
                             Console.Clear();                                            // Exit the flight menu and return to the main menu
@@ -299,7 +330,7 @@ namespace Project_practice_1
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("* == XYZ Airlines Limited == *\n\n");
+                Console.WriteLine("* == FLIGH HIGH AIRLINES == *\n\n");
                 Console.WriteLine("~ BOOKING MENU ~\n");
                 Console.WriteLine("1. Make Booking");                                              // Allows the user to create a booking.
                 Console.WriteLine("2. View Bookings");                                             // Allows the user to view all the bookings.
@@ -314,39 +345,44 @@ namespace Project_practice_1
                             Console.Clear();
                             if (bookingManager.MakeBooking(flightManager, customersManager))           // When we add Booking,
                             {                                                                          // There's a list of all Customers and Flights.          
-                                Console.WriteLine("\nPress any key to continue.");
+                                Console.WriteLine("\nBooking successfully made!");
                             }
                             else
                             {
                                 Console.WriteLine("\nBooking failed. Press any key to continue.");     // If something goes wrong, inform the user that the booking is failed.
                             }
+                            Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
                             break;                                                                     // End of the logic for Making a Booking.
                         case 2:                                                                        // Start of logic to View Bookings.
+                            if (bookingManager.numBookings == 0)                  // Check if we have existing bookings.
+                            {                                                     // If we don't have existing booking 
+                                Console.WriteLine("\n\nBooking list is empty.");  // Inform the user.
+                                Console.WriteLine("Press any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;
+                            }
                             Console.Clear();
                             Console.WriteLine(bookingManager.ViewBookings());
-                            Console.WriteLine("\nPress any key to continue.");
+                            Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
-                            Console.Clear();
                             break;                                                                    // End of the logic to View Bookings.
                         case 3:
                             Console.Clear();
                             return;                                                                   // Exit the booking menu and return to the main menu
                         default:
                             Console.WriteLine("Invalid choice. Please try again.");
-                            Console.WriteLine("\nPress any key to continue.");
-                            Console.ReadKey();
-                            Console.Clear();
                             break;
                     }
                 }
                 else
                 {
                     Console.WriteLine("\nInvalid input. Please enter a number.");      // If the user put invalid choice, inform them.
+                    Console.WriteLine("Press any key to continue.....");                   // Allow them to continue if they choose any key.
+                    Console.ReadKey();
                 }
-                Console.WriteLine("Press any key to continue.....");                   // Allow them to continue if they choose any key.
-                Console.ReadKey();
                 Console.Clear();
             }
         }
@@ -360,4 +396,4 @@ namespace Project_practice_1
             }
         }
     }
-}   
+}

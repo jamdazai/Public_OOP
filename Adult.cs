@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_practice_1
+namespace Project_OOP
 {
     internal class Adult : Customers
     {

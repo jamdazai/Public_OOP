@@ -1,21 +1,22 @@
-﻿using System;
+﻿using Project_OOP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_practice_1
+namespace Project_OOP
 {
     internal class FlightManager
     {
-        protected int numFlights;
+        public int numFlights;
         protected int maxFlights;
         public Flight[] flightList;
         private int numBookings;
         private int maxBookings;
         private Booking[] bookingList;
 
-        public FlightManager (int max, int maxBookings)
+        public FlightManager(int max, int maxBookings)
         {
             this.numFlights = 0;
             this.maxFlights = max;
@@ -78,7 +79,7 @@ namespace Project_practice_1
             string s = " === * LIST OF ALL FLIGHTS * === ";
             for (int i = 0; i < numFlights; i++)                // Iterates through the existing flights in our flightList array.
             {
-                s = s + "\n" + flightList[i].ToString();        
+                s = s + "\n" + flightList[i].ToString();
                 s = s + "\n";
             }
             return s;                                           // Print all the details of the flights we have.
@@ -97,7 +98,7 @@ namespace Project_practice_1
             }
 
             if (flightIndex == -1)                                                         // Check if the flightIndex is still -1 after the loop.
-            {       
+            {
                 Console.WriteLine("Flight not found. Please provide a valid flight ID.");  // If it is, there's no flight was found using the specified flight ID.
                 return false;                                                              // return the logic as false.
             }
@@ -121,7 +122,7 @@ namespace Project_practice_1
                 {
                     bookingList[i].BookedFlight.RemoveBooking(bookingList[i]);
                     bookingList[i].BookedCustomer.RemoveBooking(bookingList[i]);
-                                                                                           // Remove the booking by shifting the remaining elements.
+                    // Remove the booking by shifting the remaining elements.
                     for (int j = i; j < numBookings - 1; j++)
                     {
                         bookingList[j] = bookingList[j + 1];
@@ -136,7 +137,7 @@ namespace Project_practice_1
                 flightList[i] = flightList[i + 1];
             }
 
-                                                                                           // If the flight is found; 
+            // If the flight is found; 
             numFlights--;                                                                  // Decrement the number of flights we have.
             Console.WriteLine("Flight successfully deleted!");                             // Inform the user that the flight was successfully deleted.
             return true;
@@ -147,7 +148,7 @@ namespace Project_practice_1
             for (int i = 0; i < numBookings; i++)                       // Iterate through bookings to check if the flight has any.
             {
                 if (bookingList[i] != null &&
-                    bookingList[i].BookedFlight != null && 
+                    bookingList[i].BookedFlight != null &&
                     bookingList[i].BookedFlight.flightID == flightID)
                 {
                     return true;                                        // Flight has bookings.
@@ -169,7 +170,7 @@ namespace Project_practice_1
         }
 
         public string ViewParticularFlight(int flightID)           // Method to View a Particular FLight.
-        { 
+        {
             for (int i = 0; i < numFlights; i++)                   // Iterates to the existing flights we have in the array.
             {
                 if (flightList[i].flightID == flightID)            // Check if we have a match in our flight ID.

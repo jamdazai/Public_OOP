@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Project_OOP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_practice_1
+namespace Project_OOP
 {
     internal class BookingManager
     {
-        private int numBookings;
+        public int numBookings;
         private int maxBookings;
         private Booking[] bookingList;
 
@@ -55,7 +56,14 @@ namespace Project_practice_1
                 Console.WriteLine(customerManager.ViewCustomers());  // Show the records of customers.
 
                 Console.Write("\nEnter Customer ID: ");              // Ask the user to enter a Customer ID.
-                int customerID = Convert.ToInt32(Console.ReadLine());
+                int customerID;
+                    if (!int.TryParse(Console.ReadLine(), out customerID))
+                    {
+                        Console.WriteLine("\nInvalid choice. Please enter a number. \nPress any key to continue.....");
+                        Console.ReadKey();
+                        Console.Clear();
+                        continue;
+                    }
                 Customers customer = customerManager.GetCustomerById(customerID);
 
                 if (customer == null)
@@ -113,7 +121,6 @@ namespace Project_practice_1
                     numBookings++;                                                              // We are adding up the number of bookings.
                     flight.AddBooking(bookingList[numBookings - 1]);
                     customer.AddBooking(bookingList[numBookings - 1]);
-                    Console.WriteLine("Booking successfully made.");                            // Inform the user that the booking is successful.
                     return true;
                 }
                 else
@@ -128,7 +135,7 @@ namespace Project_practice_1
         {
             if (numBookings == 0)
             {
-                return "No bookings available.";                 // If there's not booking, inform the user.
+                return "No bookings available.\n\n";                 // If there's not booking, inform the user.
             }
             string s = " === * LIST OF ALL BOOKINGS * === ";
             for (int i = 0; i < numBookings; i++)

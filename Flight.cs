@@ -5,14 +5,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_practice_1
+namespace Project_OOP
 {
     internal class Flight
     {
         public int flightID;
         public string flightOrigin;
         public string flightDestination;
-        public int MaxSeats { get; set; } 
+        public int MaxSeats { get; set; }
         public int PassengerCount { get; set; }
         private List<Booking> bookings = new List<Booking>();
 

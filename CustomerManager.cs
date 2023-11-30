@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Project_OOP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_practice_1
+namespace Project_OOP
 {
     internal class CustomerManager
     {
-        protected int numCustomer;
+        public int numCustomer;
         protected int maxCustomer;
         public Customers[] customerList;
         private int numBookings;
@@ -23,7 +24,7 @@ namespace Project_practice_1
             this.numBookings = 0;
             bookingList = new Booking[max];
         }
-        
+
         public bool CustomerExists(string firstName, string lastName, string phone) // Method to identify if we already have an existing customer.
         {
             for (int i = 0; i < numCustomer; i++)                                   // Check if a customer with the same first name, last name, and phone already exists
@@ -45,7 +46,7 @@ namespace Project_practice_1
                 Console.WriteLine("\nCustomer already exists. Cannot duplicate records!");               // Inform the customer that we can't duplicate records.
                 return false;                                                                            // Return false if we already have existing records for that customer.
             }
-            
+
             if (numCustomer >= maxCustomer)                                                              // Check if the number of customers we have 
             {                                                                                            // is less than the max capacity.
                 Console.WriteLine("Customer list is full! Cannot add more customers.");                  // Inform the user that our customer list is full. 
@@ -76,7 +77,7 @@ namespace Project_practice_1
         }                                                                                                // End of method to ADD CUSTOMER.
 
 
- 
+
         public int GenerateCustomerID()    // Method to allow us generate unique ID for customers.
         {
             return 1000 + numCustomer + 1; // Preferably customer IDs starts with 1000
@@ -97,9 +98,9 @@ namespace Project_practice_1
         }
 
         public bool DeleteCustomer(string firstName, string lastName, string phone)      // Start of method for us to delete a customer.
-        {          
+        {
             bool customerExists = CustomerExists(firstName, lastName, phone);            // Check if a customer with the specified details exists.
-       
+
             if (customerExists)                                                          // If customer is exists, proceed to deletion process.
             {
                 if (CustomerHasBookings(firstName, lastName, phone))
@@ -160,7 +161,6 @@ namespace Project_practice_1
                 Console.WriteLine("\nCustomer not found. Deletion canceled.");     // Inform the user and we will terminate the removal.
                 return false;                                                      // Customer not found, deletion canceled, we return False.
             }
-            return false;
         }                                                                          // End of method to DELETE A CUSTOMER.
 
         private string GetCustomerInfo(string firstName, string lastName, string phone)        // Start of method to allow us to identify if there's a record for our customer.
@@ -192,6 +192,10 @@ namespace Project_practice_1
         // Method to view all existing customers in our record.
         public string ViewCustomers()
         {
+            if (numCustomer == 0)
+            {
+                return "No customers available.\n\n";                 // If there's no customers, inform the user.
+            }
             string s = " === * LIST OF ALL CUSTOMERS * === ";
             for (int i = 0; i < numCustomer; i++)
             {

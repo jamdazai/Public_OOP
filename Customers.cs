@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_practice_1
+namespace Project_OOP
 {
     internal abstract class Customers
     {
@@ -25,9 +25,8 @@ namespace Project_practice_1
         }
 
         public void AddBooking(Booking booking)
-        {         
+        {
             bookings.Add(booking);                              // Add the booking to the list of bookings
-            Console.WriteLine("Booking added successfully!");
         }
 
         public void RemoveBooking(Booking booking)
@@ -44,20 +43,20 @@ namespace Project_practice_1
             s += "\nCustomer's Full name: " + customerFirstName + " " + customerLastName;    // Show the Full Name of the customer, combine the First Name and Last Name
             s += "\nPhone #: " + customerPhone;                                              // Show the Phone Number of the customer.
             s += "\n\n[[  BOOKINGS  ]]";                                                            // Show the Bookings they have.
-                if (bookings.Count == 0)                                                     // If they don't have booking,
+            if (bookings.Count == 0)                                                     // If they don't have booking,
+            {
+                s += "\nNo bookings available.";                                         // Inform the user that they don't have booking.
+            }
+            else
+            {
+                foreach (var booking in bookings)
                 {
-                    s += "\nNo bookings available.";                                         // Inform the user that they don't have booking.
-                }
-                else
-                {
-                    foreach (var booking in bookings)
-                    {
                     s += $"\nBooking Number: {booking.BookingNumber}" +
                          $"\n\n[[  FLIGHTS  ]] {booking.BookedFlight}" +
                          $"\nDate: {booking.Date}";
-                    }
                 }
-           return s;
+            }
+            return s;
         }
     }
 }
