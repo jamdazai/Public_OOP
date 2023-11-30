@@ -101,7 +101,14 @@ namespace Project_practice_1
                         phone = Console.ReadLine();                         // Pass the input to phone.
 
                         Console.WriteLine("\nEnter age: ");                 // Ask the user fo age.
-                        customerAge = Convert.ToInt32(Console.ReadLine());  // Pass the input to customerAge.
+                            if (!int.TryParse(Console.ReadLine(), out customerAge))               // Pass the input to customer age and convert it to int.
+                            {
+                                Console.WriteLine("Invalid input. Please enter a valid number."); // Remind the user to put a valid number.
+                                Console.WriteLine("Press any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;                                                         // Go back to Customer Menu
+                            }
 
                         if (customersManager.AddCustomer(firstName, lastName, phone, customerAge))     // If everything is good.
                         {                                                                              // inform the user that
@@ -190,8 +197,15 @@ namespace Project_practice_1
                             Console.WriteLine("\nEnter Destination: ");                 // Ask the user for destination
                             destination = Console.ReadLine();                           // Pass the input to our destination variable.
 
-                            Console.WriteLine("\nEnter Max Seats: ");                   // Ask the user for the max seats.
-                            maxSeats = Convert.ToInt32(Console.ReadLine());             // Pass the input to maxSeats and convert it to int.
+                            Console.WriteLine("\nEnter Max Seats: ");                   // Ask the user for the max seats.                     
+                                if (!int.TryParse(Console.ReadLine(), out maxSeats))    // Pass the input to maxSeats and convert it to int.
+                                {
+                                    Console.WriteLine("Invalid input. Please enter a valid number."); // Remind the user to put a valid number.
+                                    Console.WriteLine("Press any key to continue.");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    continue;                                           // Go back to Flight Menu
+                                }
 
                             flightManager.AddFlight(origin, destination, maxSeats);     // Add the flight to using our method AddFlight.
                             Console.WriteLine("\nPress any key to continue.");
